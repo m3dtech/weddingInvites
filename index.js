@@ -30,10 +30,10 @@ const CONFIG = {
 const Data = {
   private: false,
   NameMale: "Mahmoud",
-  NameFamale: "Sara",
+  NameFamale: "Ahlam",
   eventShow: "2026-12-1",
   eventDate: new Date("2026-05-01T20:00:00"),
-  locationName: "مريوطية",
+  locationName: "بنها - مصر",
   locationLink: "https://google.com",
 };
 
