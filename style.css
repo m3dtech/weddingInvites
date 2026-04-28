@@ -1,0 +1,232 @@
+/* ===== Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.dashboard{
+    position: fixed;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #111;
+    color: white;
+}
+
+button{
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+}
+#guestList li{
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
+    background: #222;
+    padding: 5px;
+    margin: 5px;
+}
+
+/* ===== Body ===== */
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #fff0f5, #f8bbd0);
+  font-family: 'Cairo', sans-serif;
+  overflow: hidden;
+}
+
+.card div{
+    padding-bottom: 10px;
+}
+
+.All{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* ===== Wrapper ===== */
+.envelope-wrapper {
+  position: relative;
+  width: 320px;
+  height: 220px;
+  perspective: 1200px;
+  cursor: pointer;
+}
+
+/* ===== Envelope ===== */
+.envelope {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #c79462;
+  border-radius: 10px;
+  z-index: 3;
+  transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.8s ease;
+}
+
+/* ===== Flap ===== */
+.flap {
+  position: absolute;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-left: 160px solid transparent;
+  border-right: 160px solid transparent;
+  border-top: 110px solid #d19f71;
+  transform-origin: top;
+  transition: transform 0.7s ease 0.2s;
+  z-index: 5;
+}
+
+/* ===== Front ===== */
+.front {
+  position: absolute;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-left: 160px solid transparent;
+  border-right: 160px solid transparent;
+  border-bottom: 110px solid #e5b98f;
+  z-index: 4;
+}
+
+/* ===== Seal ===== */
+.seal {
+  position: absolute;
+  top: 110px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 55px;
+  height: 55px;
+  background: radial-gradient(circle, #e53935, #8e0000);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: gold;
+  font-size: 22px;
+  z-index: 6;
+  transition: all 0.3s ease;
+}
+
+/* ===== CARD ===== */
+.card {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+
+  width: 90%;
+  height: auto;
+
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+
+  border: 2px solid #d4a373;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+
+  transform: translateX(-50%) translateY(20px) scale(0.95);
+  opacity: 0;
+
+  transition:
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.5s ease;
+
+  z-index: 2;
+}
+
+.card img{
+    width: 30px;
+    height: auto;
+}
+
+.info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+/* ===== OPEN STATE (التسلسل المنظم) ===== */
+
+/* 1) الختم */
+.open .seal {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+}
+
+/* 2) الغطاء */
+.open .flap {
+  transform: rotateX(180deg);
+}
+
+/* 3) البطاقة تطلع */
+.open .card {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-50px) scale(1.05);
+  transition-delay: 0.35s;
+  z-index: 10;
+}
+
+/* 4) الظرف ينزل ويختفي آخر شيء */
+.open .envelope {
+  transform: translateY(140vh);
+  opacity: 0;
+  transition-delay: 0.8s;
+}
+
+/* ===== Hover بسيط ===== */
+.envelope-wrapper:hover {
+  transform: scale(1.02);
+  transition: 0.3s;
+}
+
+.watermark {
+  position: fixed;
+  bottom: 15px;
+  left: 15px;
+
+  font-size: 12px;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.5);
+
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  background: rgba(0, 0, 0, 0.25);
+  padding: 6px 10px;
+  border-radius: 8px;
+
+  user-select: none;
+
+  z-index: 9999;
+
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+}
+
+#countdown{
+    direction: ltr;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 400px) {
+  .envelope-wrapper {
+    transform: scale(0.85);
+  }
+
+  .open .card {
+    transform: translateX(-50%) translateY(-140px) scale(1.03);
+  }
+}
