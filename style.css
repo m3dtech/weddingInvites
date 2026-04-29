@@ -1,33 +1,43 @@
+@font-face {
+  font-family: 'MyFont';
+  src: url('font.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* ===== Reset ===== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  direction: rtl;
+  font-family: 'MyFont', sans-serif;
 }
 
-.dashboard{
-    position: fixed;
-    inset: 0;
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: #111;
-    color: white;
+.dashboard {
+  position: fixed;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #111;
+  color: white;
 }
 
-button{
-    padding: 10px;
-    margin: 5px;
-    cursor: pointer;
+button {
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
 }
-#guestList li{
-    display: flex;
-    justify-content: space-between;
-    width: 250px;
-    background: #222;
-    padding: 5px;
-    margin: 5px;
+
+#guestList li {
+  display: flex;
+  justify-content: space-between;
+  width: 250px;
+  background: #222;
+  padding: 5px;
+  margin: 5px;
 }
 
 /* ===== Body ===== */
@@ -37,19 +47,30 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #fff0f5, #f8bbd0);
-  font-family: 'Cairo', sans-serif;
+  background-image: url('img/rose.png');
+  background-size: cover;
+  /* تغطي الشاشة */
+  background-position: center;
+  /* توسيط الصورة */
+  background-repeat: no-repeat;
+  /* منع التكرار */
+  height: 100vh;
   overflow: hidden;
 }
 
-.card div{
-    padding-bottom: 10px;
+.All .hint {
+  margin-bottom: 30px;
+  font-size: larger;
 }
 
-.All{
-    text-align: center;
-    display: flex;
-    flex-direction: column;
+.card div {
+  padding-bottom: 10px;
+}
+
+.All {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 
@@ -71,7 +92,7 @@ body {
   border-radius: 10px;
   z-index: 3;
   transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1),
-              opacity 0.8s ease;
+    opacity 0.8s ease;
 }
 
 /* ===== Flap ===== */
@@ -134,7 +155,7 @@ body {
   text-align: center;
 
   border: 2px solid #d4a373;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 
   transform: translateX(-50%) translateY(20px) scale(0.95);
   opacity: 0;
@@ -144,18 +165,74 @@ body {
     opacity 0.5s ease;
 
   z-index: 2;
+
+}
+/* شكل البطاقة */
+.card {
+    position: relative;
+    width: 300px;
+    padding: 30px;
+    border-radius: 20px;
+    background: white;
+    text-align: center;
+    z-index: 1;
 }
 
-.card img{
-    width: 30px;
-    height: auto;
+/* الإطار المتحرك */
+.card::before {
+    content: "";
+    position: absolute;
+    inset: -3px; /* سمك الإطار */
+    border-radius: 25px;
+
+    /* التدرج */
+    background: linear-gradient(
+        270deg,
+        #ff9a9e,
+        #ff3700,
+        #ff00b7,
+        #4c00ff,
+        #000000
+    );
+
+    background-size: 600% 600%;
+
+    /* الأنيميشن */
+    animation: borderMove 6s linear infinite;
+
+    z-index: -1;
 }
 
-.info{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
+/* نخلي الوسط أبيض (يخفي التدرج من الداخل) */
+.card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    background: white;
+    z-index: -1;
+}
+
+/* حركة التدرج */
+@keyframes borderMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+.card img {
+  width: 30px;
+  height: auto;
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
 }
 
 /* ===== OPEN STATE (التسلسل المنظم) ===== */
@@ -216,8 +293,37 @@ body {
   cursor: pointer;
 }
 
-#countdown{
-    direction: ltr;
+#countdown {
+  direction: ltr;
+  font-size: 40px;
+  font-weight: bold;
+
+  /* التدرج اللوني */
+  background: linear-gradient(270deg, #ff9a9e, #ff3700, #ff00b7, #000000);
+
+  /* يخلي اللون داخل النص */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* حجم أكبر عشان الحركة تبان */
+  background-size: 800% 800%;
+
+  /* الأنيميشن */
+  animation: gradientMove 8s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 /* ===== Responsive ===== */

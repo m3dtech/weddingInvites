@@ -18,7 +18,7 @@ const adminKey = params.get("adminKey");
 // CONFIG
 // ========================
 const CONFIG = {
-  enableCountDown: true,
+  enableCountDown: false,
   enableGuests: true,
   enableDashboard: true,
   adminKey: "admin"
@@ -29,11 +29,11 @@ const CONFIG = {
 // ========================
 const Data = {
   private: false,
-  NameMale: "Mahmoud",
-  NameFamale: "Ahlam",
+  NameMale: "Ahmed",
+  NameFamale: "Salma",
   eventShow: "2026-12-1",
-  eventDate: new Date("2026-05-01T20:00:00"),
-  locationName: "بنها - مصر",
+  eventDate: new Date("2026-12-01T20:00:00"),
+  locationName: "القاهرة",
   locationLink: "https://google.com",
 };
 
