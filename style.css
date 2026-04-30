@@ -8,20 +8,39 @@
 }
 
 /* ===== Body ===== */
+/* ===== Body ===== */
 body {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #f7e6d4; /* لون بديل في حال لم تحمل الصورة */
+  background-color: #f7e6d4; /* سيبقى اللون كبديل */
+  
+  /* ❌ احذف الأسطر التالية من هنا */
+  /* background-image: url("img/rose.png"); */
+  /* background-size: cover; */
+  /* background-position: center; */
+  /* background-attachment: fixed; */
+  
+  overflow-x: hidden;
+  padding: 20px 0;
+}
+
+/* طبقة الخلفية الثابتة */
+body::before {
+  content: "";
+  position: fixed; /* يثبت الخلفية على الشاشة المرئية فقط */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   background-image: url("img/rose.png");
   background-size: cover;
   background-position: center;
-  background-attachment: fixed; /* لتثبيت الخلفية عند التمرير */
-  overflow-x: hidden; /* منع التمرير الجانبي فقط */
-  padding: 20px 0;
+  z-index: -1; /* يضمن بقاء الصورة خلف كل العناصر */
 }
+
 
 .hint {
   margin-bottom: 20px;
@@ -110,16 +129,20 @@ body {
 }
 
 /* ===== CARD ===== */
+/* ===== CARD ===== */
 .card {
   position: absolute;
+  top: 50%; /* 👈 أضف هذا السطر لتحديد المنتصف العامودي */
   left: 50%;
   width: 85%; 
-  padding: 30px 20px;/* حجم البطاقة بالنسبة للظرف */
+  padding: 30px 20px;
   border-radius: 20px;
   text-align: center;
   background: white;
 
-  transform: translateX(-50%) translateY(20px) scale(0.95);
+  /* 👈 تعديل السطر التالي للارتكاز على المنتصف تماماً */
+  transform: translate(-50%, -50%) scale(0.95); 
+  
   opacity: 0;
   transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease;
   z-index: 2;
@@ -225,14 +248,15 @@ body {
   transform: rotateX(180deg);
 }
 
+/* ===== OPEN STATE ===== */
 .open .card {
   opacity: 1;
-  /* نستخدم النسبة المئوية للرفع ليكون متجاوباً */
-  transform: translateX(-50%) translateY(-15%) scale(1.05);
+
+  transform: translate(-50%, -50%) scale(1.05); 
+  
   transition-delay: 0.35s;
   z-index: 10;
 }
-
 .open .envelope {
   transform: translateY(140vh);
   opacity: 0;
