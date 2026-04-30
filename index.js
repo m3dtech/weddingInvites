@@ -18,7 +18,7 @@ const adminKey = params.get("adminKey");
 // CONFIG
 // ========================
 const CONFIG = {
-  enableCountDown: false,
+  enableCountDown: true,
   enableGuests: true,
   enableDashboard: true,
   adminKey: "admin"
@@ -106,7 +106,7 @@ function updateCountdown() {
   const m = Math.floor((diff / (1000 * 60)) % 60);
   const s = Math.floor((diff / 1000) % 60);
 
-  el.innerText = `⏳ ${d} يوم - ${h}:${m}:${s}`;
+  el.innerText = `⏳عد تنازلي: يوم ${d} - ${h}:${m}:${s}`;
 }
 
 // ========================
@@ -157,6 +157,9 @@ if (guestEl) {
   if (CONFIG.enableCountDown) {
     updateCountdown();
     countdownInterval = setInterval(updateCountdown, 1000);
+  }
+  else{
+    document.getElementById("countdown").style.display = "none";
   }
 
   // Names

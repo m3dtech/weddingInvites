@@ -1,43 +1,10 @@
-@font-face {
-  font-family: 'MyFont';
-  src: url('font.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-
 /* ===== Reset ===== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   direction: rtl;
-  font-family: 'MyFont', sans-serif;
-}
-
-.dashboard {
-  position: fixed;
-  inset: 0;
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: #111;
-  color: white;
-}
-
-button {
-  padding: 10px;
-  margin: 5px;
-  cursor: pointer;
-}
-
-#guestList li {
-  display: flex;
-  justify-content: space-between;
-  width: 250px;
-  background: #222;
-  padding: 5px;
-  margin: 5px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* استخدم خطك هنا */
 }
 
 /* ===== Body ===== */
@@ -47,84 +14,85 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-image: url('img/rose.png');
+  background-color: #f7e6d4; /* لون بديل في حال لم تحمل الصورة */
+  background-image: url("img/rose.png");
   background-size: cover;
-  /* تغطي الشاشة */
   background-position: center;
-  /* توسيط الصورة */
-  background-repeat: no-repeat;
-  /* منع التكرار */
-  height: 100vh;
-  overflow: hidden;
+  background-attachment: fixed; /* لتثبيت الخلفية عند التمرير */
+  overflow-x: hidden; /* منع التمرير الجانبي فقط */
+  padding: 20px 0;
 }
 
-.All .hint {
-  margin-bottom: 30px;
-  font-size: larger;
-}
-
-.card div {
-  padding-bottom: 10px;
+.hint {
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  color: #333;
+  text-align: center;
+  font-weight: bold;
 }
 
 .All {
   text-align: center;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
-
 
 /* ===== Wrapper ===== */
 .envelope-wrapper {
   position: relative;
-  width: 320px;
-  height: 220px;
+  width: 90%;
+  max-width: 450px;
+  aspect-ratio: 1.5; /* يحافظ على نسبة الطول والعرض للظرف دائماً */
   perspective: 1200px;
   cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.envelope-wrapper:hover {
+  transform: scale(1.02);
 }
 
 /* ===== Envelope ===== */
 .envelope {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  inset: 0; /* تغطي الأب بالكامل */
   background: #c79462;
   border-radius: 10px;
   z-index: 3;
-  transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.8s ease;
+  transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.8s ease;
 }
 
-/* ===== Flap ===== */
+/* ===== Flap (الغطاء العلوي) ===== */
 .flap {
   position: absolute;
   top: 0;
-  width: 0;
-  height: 0;
-  border-left: 160px solid transparent;
-  border-right: 160px solid transparent;
-  border-top: 110px solid #d19f71;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background: #d19f71;
+  /* استخدام clip-path يجعله مرن 100% مع جميع الشاشات */
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
   transform-origin: top;
   transition: transform 0.7s ease 0.2s;
   z-index: 5;
 }
 
-/* ===== Front ===== */
+/* ===== Front (واجهة الظرف) ===== */
 .front {
   position: absolute;
-  bottom: 0;
-  width: 0;
-  height: 0;
-  border-left: 160px solid transparent;
-  border-right: 160px solid transparent;
-  border-bottom: 110px solid #e5b98f;
+  inset: 0;
+  background: #e5b98f;
+  border-radius: 10px;
+  clip-path: polygon(0 0, 50% 55%, 100% 0, 100% 100%, 0 100%);
   z-index: 4;
 }
 
-/* ===== Seal ===== */
+/* ===== Seal (الختم) ===== */
 .seal {
   position: absolute;
-  top: 110px;
+  top: 55%; /* يتمركز بناءً على رأس المثلث العلوي */
   left: 50%;
   transform: translate(-50%, -50%);
   width: 55px;
@@ -138,94 +106,90 @@ body {
   font-size: 22px;
   z-index: 6;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* ===== CARD ===== */
 .card {
   position: absolute;
   left: 50%;
-  bottom: 0;
-
-  width: 90%;
-  height: auto;
-
-  background: #fff;
-  border-radius: 12px;
-  padding: 20px;
+  width: 85%; 
+  padding: 30px 20px;/* حجم البطاقة بالنسبة للظرف */
+  border-radius: 20px;
   text-align: center;
-
-  border: 2px solid #d4a373;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  background: white;
 
   transform: translateX(-50%) translateY(20px) scale(0.95);
   opacity: 0;
-
-  transition:
-    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.5s ease;
-
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease;
   z-index: 2;
-
-}
-/* شكل البطاقة */
-.card {
-    position: relative;
-    width: 300px;
-    padding: 30px;
-    border-radius: 20px;
-    background: white;
-    text-align: center;
-    z-index: 1;
+  cursor: default;
 }
 
 /* الإطار المتحرك */
 .card::before {
-    content: "";
-    position: absolute;
-    inset: -3px; /* سمك الإطار */
-    border-radius: 25px;
-
-    /* التدرج */
-    background: linear-gradient(
-        270deg,
-        #ff9a9e,
-        #ff3700,
-        #ff00b7,
-        #4c00ff,
-        #000000
-    );
-
-    background-size: 600% 600%;
-
-    /* الأنيميشن */
-    animation: borderMove 6s linear infinite;
-
-    z-index: -1;
+  content: "";
+  position: absolute;
+  inset: -4px; /* سمك الإطار */
+  border-radius: 24px;
+  background: linear-gradient(
+    270deg,
+    #ff9a9e,
+    #ff3700,
+    #ff00b7,
+    #4c00ff,
+    #000000
+  );
+  background-size: 600% 600%;
+  animation: borderMove 6s linear infinite;
+  z-index: -1;
 }
 
-/* نخلي الوسط أبيض (يخفي التدرج من الداخل) */
+/* اللون الأبيض داخل البطاقة */
 .card::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 20px;
-    background: white;
-    z-index: -1;
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  background: white;
+  z-index: -1;
 }
 
-/* حركة التدرج */
-@keyframes borderMove {
-    0% {
-        background-position: 0% 50%;
-    }
-    100% {
-        background-position: 100% 50%;
-    }
+/* رفع العناصر داخل البطاقة فوق الـ ::after */
+.card > * {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 12px;
 }
 
-.card img {
-  width: 30px;
-  height: auto;
+.card h2 {
+  font-size: 1.5rem;
+  color: #333;
+}
+.card h5 {
+  font-size: 30px;
+  color: #666;
+  margin: 5px 0;
+}
+.card .title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #ff8000;
+}
+.card .description {
+  font-size: 1rem;
+  color: #555;
+}
+.card .finish {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #d4a373;
+  margin-top: 15px;
+}
+
+.discreption{
+  font-weight: bold;
+  font-size: larger;
 }
 
 .info {
@@ -233,82 +197,66 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
+  margin-top: 15px;
+  flex-wrap: wrap; /* للسماح بالتجاوب إذا ضاقت الشاشة */
+  gap: 10px;
 }
 
-/* ===== OPEN STATE (التسلسل المنظم) ===== */
+.info div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
 
-/* 1) الختم */
+.info img {
+  width: 35px;
+  height: auto;
+  margin-bottom: 5px;
+}
+
+/* ===== OPEN STATE ===== */
 .open .seal {
   opacity: 0;
   transform: translate(-50%, -50%) scale(0);
 }
 
-/* 2) الغطاء */
 .open .flap {
   transform: rotateX(180deg);
 }
 
-/* 3) البطاقة تطلع */
 .open .card {
   opacity: 1;
-  transform: translateX(-50%) translateY(-50px) scale(1.05);
+  /* نستخدم النسبة المئوية للرفع ليكون متجاوباً */
+  transform: translateX(-50%) translateY(-15%) scale(1.05);
   transition-delay: 0.35s;
   z-index: 10;
 }
 
-/* 4) الظرف ينزل ويختفي آخر شيء */
 .open .envelope {
   transform: translateY(140vh);
   opacity: 0;
   transition-delay: 0.8s;
 }
 
-/* ===== Hover بسيط ===== */
-.envelope-wrapper:hover {
-  transform: scale(1.02);
-  transition: 0.3s;
-}
-
-.watermark {
-  position: fixed;
-  bottom: 15px;
-  left: 15px;
-
-  font-size: 12px;
-  font-weight: bold;
-  color: rgba(255, 255, 255, 0.5);
-
-  letter-spacing: 2px;
-  text-transform: uppercase;
-
-  background: rgba(0, 0, 0, 0.25);
-  padding: 6px 10px;
-  border-radius: 8px;
-
-  user-select: none;
-
-  z-index: 9999;
-
-  backdrop-filter: blur(4px);
-  cursor: pointer;
+/* ===== Animations ===== */
+@keyframes borderMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
 }
 
 #countdown {
   direction: ltr;
-  font-size: 40px;
+  font-size: large;
   font-weight: bold;
-
-  /* التدرج اللوني */
-  background: linear-gradient(270deg, #ff9a9e, #ff3700, #ff00b7, #000000);
-
-  /* يخلي اللون داخل النص */
+  background: linear-gradient(270deg, #ff9a9e, #ff3700, #ff00b7, #333);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-
-  /* حجم أكبر عشان الحركة تبان */
   background-size: 800% 800%;
-
-  /* الأنيميشن */
   animation: gradientMove 8s ease infinite;
 }
 
@@ -316,23 +264,27 @@ body {
   0% {
     background-position: 0% 50%;
   }
-
   50% {
     background-position: 100% 50%;
   }
-
   100% {
     background-position: 0% 50%;
   }
 }
 
-/* ===== Responsive ===== */
-@media (max-width: 400px) {
-  .envelope-wrapper {
-    transform: scale(0.85);
-  }
-
-  .open .card {
-    transform: translateX(-50%) translateY(-140px) scale(1.03);
-  }
+/* ===== Watermark ===== */
+.watermark {
+  position: fixed;
+  bottom: 15px;
+  left: 15px;
+  font-size: 12px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.6);
+  letter-spacing: 1px;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 6px 10px;
+  border-radius: 8px;
+  z-index: 9999;
+  backdrop-filter: blur(4px);
+  cursor: pointer;
 }
