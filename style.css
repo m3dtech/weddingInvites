@@ -16,13 +16,7 @@ body {
   align-items: center;
   min-height: 100vh;
   background-color: #f7e6d4; /* سيبقى اللون كبديل */
-  
-  /* ❌ احذف الأسطر التالية من هنا */
-  /* background-image: url("img/rose.png"); */
-  /* background-size: cover; */
-  /* background-position: center; */
-  /* background-attachment: fixed; */
-  
+
   overflow-x: hidden;
   padding: 20px 0;
 }
@@ -40,7 +34,6 @@ body::before {
   background-position: center;
   z-index: -1; /* يضمن بقاء الصورة خلف كل العناصر */
 }
-
 
 .hint {
   margin-bottom: 20px;
@@ -91,7 +84,6 @@ body::before {
   width: 100%;
   height: 60%;
   background: #d19f71;
-  /* استخدام clip-path يجعله مرن 100% مع جميع الشاشات */
   clip-path: polygon(0 0, 100% 0, 50% 100%);
   transform-origin: top;
   transition: transform 0.7s ease 0.2s;
@@ -111,7 +103,7 @@ body::before {
 /* ===== Seal (الختم) ===== */
 .seal {
   position: absolute;
-  top: 55%; /* يتمركز بناءً على رأس المثلث العلوي */
+  top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 55px;
@@ -128,21 +120,18 @@ body::before {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* ===== CARD ===== */
-/* ===== CARD ===== */
 .card {
   position: absolute;
-  top: 50%; /* 👈 أضف هذا السطر لتحديد المنتصف العامودي */
+  top: 50%;
   left: 50%;
-  width: 85%; 
+  width: 85%;
   padding: 30px 20px;
-  border-radius: 20px;
+  border-radius: 10px;
   text-align: center;
   background: white;
 
-  /* 👈 تعديل السطر التالي للارتكاز على المنتصف تماماً */
-  transform: translate(-50%, -50%) scale(0.95); 
-  
+  transform: translate(-50%, -50%) scale(0.95);
+
   opacity: 0;
   transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease;
   z-index: 2;
@@ -154,11 +143,11 @@ body::before {
   content: "";
   position: absolute;
   inset: -4px; /* سمك الإطار */
-  border-radius: 24px;
+  border-radius: 10px;
   background: linear-gradient(
-    270deg,
-    #ff9a9e,
-    #ff3700,
+    1000deg,
+    #ff0008,
+    #00ff22,
     #ff00b7,
     #4c00ff,
     #000000
@@ -178,7 +167,6 @@ body::before {
   z-index: -1;
 }
 
-/* رفع العناصر داخل البطاقة فوق الـ ::after */
 .card > * {
   position: relative;
   z-index: 1;
@@ -210,7 +198,7 @@ body::before {
   margin-top: 15px;
 }
 
-.discreption{
+.discreption {
   font-weight: bold;
   font-size: larger;
 }
@@ -221,7 +209,7 @@ body::before {
   align-items: center;
   justify-content: space-around;
   margin-top: 15px;
-  flex-wrap: wrap; /* للسماح بالتجاوب إذا ضاقت الشاشة */
+  flex-wrap: wrap;
   gap: 10px;
 }
 
@@ -252,13 +240,12 @@ body::before {
 .open .card {
   opacity: 1;
 
-  transform: translate(-50%, -50%) scale(1.05); 
-  
+  transform: translate(-50%, -50%) scale(1.05);
+
   transition-delay: 0.35s;
   z-index: 10;
 }
 .open .envelope {
-  transform: translateY(140vh);
   opacity: 0;
   transition-delay: 0.8s;
 }
@@ -277,7 +264,7 @@ body::before {
   direction: ltr;
   font-size: large;
   font-weight: bold;
-  background: linear-gradient(270deg, #ff9a9e, #ff3700, #ff00b7, #333);
+  background: linear-gradient(70deg, #33ff00, #ff3700, #ff00b7, #000000);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-size: 800% 800%;
