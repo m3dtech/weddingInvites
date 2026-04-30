@@ -1,30 +1,26 @@
-/* ===== Reset ===== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   direction: rtl;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* استخدم خطك هنا */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* ===== Body ===== */
-/* ===== Body ===== */
 body {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #f7e6d4; /* سيبقى اللون كبديل */
+  background-color: #f7e6d4;
 
   overflow-x: hidden;
   padding: 20px 0;
 }
 
-/* طبقة الخلفية الثابتة */
 body::before {
   content: "";
-  position: fixed; /* يثبت الخلفية على الشاشة المرئية فقط */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
@@ -32,7 +28,7 @@ body::before {
   background-image: url("img/rose.png");
   background-size: cover;
   background-position: center;
-  z-index: -1; /* يضمن بقاء الصورة خلف كل العناصر */
+  z-index: -1;
 }
 
 .hint {
@@ -51,12 +47,11 @@ body::before {
   width: 100%;
 }
 
-/* ===== Wrapper ===== */
 .envelope-wrapper {
   position: relative;
   width: 90%;
   max-width: 450px;
-  aspect-ratio: 1.5; /* يحافظ على نسبة الطول والعرض للظرف دائماً */
+  aspect-ratio: 1.5;
   perspective: 1200px;
   cursor: pointer;
   transition: transform 0.3s ease;
@@ -66,17 +61,15 @@ body::before {
   transform: scale(1.02);
 }
 
-/* ===== Envelope ===== */
 .envelope {
   position: absolute;
-  inset: 0; /* تغطي الأب بالكامل */
+  inset: 0;
   background: #c79462;
   border-radius: 10px;
   z-index: 3;
   transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.8s ease;
 }
 
-/* ===== Flap (الغطاء العلوي) ===== */
 .flap {
   position: absolute;
   top: 0;
@@ -90,7 +83,6 @@ body::before {
   z-index: 5;
 }
 
-/* ===== Front (واجهة الظرف) ===== */
 .front {
   position: absolute;
   inset: 0;
@@ -100,7 +92,6 @@ body::before {
   z-index: 4;
 }
 
-/* ===== Seal (الختم) ===== */
 .seal {
   position: absolute;
   top: 55%;
@@ -138,11 +129,10 @@ body::before {
   cursor: default;
 }
 
-/* الإطار المتحرك */
 .card::before {
   content: "";
   position: absolute;
-  inset: -4px; /* سمك الإطار */
+  inset: -4px;
   border-radius: 10px;
   background: linear-gradient(
     1000deg,
@@ -157,7 +147,6 @@ body::before {
   z-index: -1;
 }
 
-/* اللون الأبيض داخل البطاقة */
 .card::after {
   content: "";
   position: absolute;
@@ -226,7 +215,6 @@ body::before {
   margin-bottom: 5px;
 }
 
-/* ===== OPEN STATE ===== */
 .open .seal {
   opacity: 0;
   transform: translate(-50%, -50%) scale(0);
@@ -236,7 +224,6 @@ body::before {
   transform: rotateX(180deg);
 }
 
-/* ===== OPEN STATE ===== */
 .open .card {
   opacity: 1;
 
@@ -250,7 +237,6 @@ body::before {
   transition-delay: 0.8s;
 }
 
-/* ===== Animations ===== */
 @keyframes borderMove {
   0% {
     background-position: 0% 50%;
@@ -283,7 +269,6 @@ body::before {
   }
 }
 
-/* ===== Watermark ===== */
 .watermark {
   position: fixed;
   bottom: 15px;
